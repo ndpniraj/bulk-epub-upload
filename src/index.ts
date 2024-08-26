@@ -201,13 +201,12 @@ const startBulkBookCreation = async () => {
   console.log(`Please wait I am creating ${finalData.length} new books.`);
   const authors = await AuthorModel.find().select("_id");
 
-  await createNewBook(finalData[0], authors[0]._id.toString());
-  // finalData.forEach(async (data, index) => {
-  //   // Log progress
-  //   const progress = ((index + 1) / finalData.length) * 100;
-  //   console.log(`Progress: ${progress.toFixed(2)}%`);
-  //   await createNewBook(data, authors[index]._id.toString());
-  // });
+  finalData.forEach(async (data, index) => {
+    // Log progress
+    const progress = ((index + 1) / finalData.length) * 100;
+    console.log(`Progress: ${progress.toFixed(2)}%`);
+    await createNewBook(data, authors[index]._id.toString());
+  });
 
   // book uploading process (END)
 
@@ -265,4 +264,4 @@ const startBulkUserCreation = async () => {
 };
 
 // startBulkUserCreation();
-startBulkBookCreation();
+// startBulkBookCreation();
